@@ -29,12 +29,11 @@ def thread_Connection():
         list_pending_messages = [] #we clear the list after all were sent
         mutex.release()
         readable, writeable, exceptional = select.select(
-            list_sockets, [], list_sockets, 1
+            list_sockets, [], list_sockets, 0.1
         )
         for s in readable:
             data = sock.recv(1024).decode('utf-8')  # Wait for, and then receive, incoming data
             if data:
-                print("We received a message:")
                 print(data)
 
 
